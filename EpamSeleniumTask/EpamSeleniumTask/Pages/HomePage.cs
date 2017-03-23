@@ -25,7 +25,7 @@ namespace EpamSeleniumTask.Pages
         public void Open()
         {
             driver.Url = "https://www.expedia.com/";
-            wait.Until(ExpectedConditions.TitleContains("Vacations"));
+            wait.Until(ExpectedConditions.ElementExists(By.Id("tab-flight-tab-hp")));
         }
 
         public void SelectFlights()
@@ -64,16 +64,12 @@ namespace EpamSeleniumTask.Pages
         {
             SelectElement adult = new SelectElement(driver.FindElement(By.Id("flight-adults-hp-flight")));
             adult.SelectByText(number.ToString());
-            
-            //driver.FindElement(By.Id("flight-adults-hp-flight")).SendKeys(number.ToString());
         }
 
         public void ClickSearch()
         {
             driver.FindElement(By.XPath("//*[@type='submit']")).Click();
-            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(".//*[@id='acol-interstitial']/h3")));
-            IWebElement progressBar = driver.FindElement(By.XPath(".//*[@id='acol-interstitial']/div"));
-            wait.Until(ExpectedConditions.StalenessOf(progressBar));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(".//*[@id='acol-interstitial']/div")));
         }
     }
 }
