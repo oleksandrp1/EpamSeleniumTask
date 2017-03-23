@@ -72,8 +72,8 @@ namespace EpamSeleniumTask.Pages
         {
             driver.FindElement(By.XPath("//*[@type='submit']")).Click();
             //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(".//*[@id='acol-interstitial']/h3")));
-            //IWebElement progressBar = driver.FindElement(By.XPath(".//*[@id='acol-interstitial']/div"));
-            //wait.Until(ExpectedConditions.StalenessOf(progressBar));
+            IWebElement progressBar = driver.FindElement(By.XPath(".//*[@id='acol-interstitial']/div"));
+            wait.Until(ExpectedConditions.StalenessOf(progressBar));
         }
     }
 }

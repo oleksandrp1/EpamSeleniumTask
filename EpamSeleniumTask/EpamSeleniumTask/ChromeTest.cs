@@ -18,10 +18,8 @@ namespace EpamSeleniumTask
         [SetUp]
         public void start()
         {
-            FirefoxOptions options = new FirefoxOptions();
-            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-            //driver = new FirefoxDriver(options);
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
