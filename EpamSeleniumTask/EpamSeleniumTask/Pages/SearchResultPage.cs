@@ -37,15 +37,15 @@ namespace EpamSeleniumTask.Pages
             int stopsID = 0;
             int airlinesIncludedID = 0;
             int countOfFilters = driver.FindElements(By.XPath(".//*[@id='filterContainer']/fieldset/legend/span[1]")).Count;
-            for (int i=1; i<=countOfFilters; i++)
+            for (int i=0; i<=countOfFilters; i++)
             {
                 if (driver.FindElements(By.XPath(".//*[@id='filterContainer']/fieldset/legend/span[1]"))[i].GetAttribute("textContent") == "Stops")
                 {
-                    stopsID = i;
+                    stopsID = i+1;
                 }
                 else if (driver.FindElements(By.XPath(".//*[@id='filterContainer']/fieldset/legend/span[1]"))[i].GetAttribute("textContent") == "Airlines included")
                 {
-                    airlinesIncludedID = i;
+                    airlinesIncludedID = i+1;
                 }
 
                 if (airlinesIncludedID != 0 && stopsID !=0)

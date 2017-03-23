@@ -62,15 +62,16 @@ namespace EpamSeleniumTask.Pages
 
         public void PickAdult(int number)
         {
-            //driver.FindElement(By.Id("flight-adults-hp-flight")).FindElement(By.XPath("//option[@value='"+ number.ToString() +"']"));
-
-            driver.FindElement(By.Id("flight-adults-hp-flight")).SendKeys(number.ToString());
+            SelectElement adult = new SelectElement(driver.FindElement(By.Id("flight-adults-hp-flight")));
+            adult.SelectByText(number.ToString());
+            
+            //driver.FindElement(By.Id("flight-adults-hp-flight")).SendKeys(number.ToString());
         }
 
         public void ClickSearch()
         {
             driver.FindElement(By.XPath("//*[@type='submit']")).Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(".//*[@id='acol-interstitial']/h3")));
+            //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(".//*[@id='acol-interstitial']/h3")));
             //IWebElement progressBar = driver.FindElement(By.XPath(".//*[@id='acol-interstitial']/div"));
             //wait.Until(ExpectedConditions.StalenessOf(progressBar));
         }
