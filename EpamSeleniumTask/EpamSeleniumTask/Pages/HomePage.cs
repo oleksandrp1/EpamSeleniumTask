@@ -48,16 +48,31 @@ namespace EpamSeleniumTask.Pages
             driver.FindElement(By.PartialLinkText(airport)).Click();
         }
 
-        public void SelectDeparting(string data)
+        /*private void SetDatepicker(string cssSelector, string date)
+        {
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until<bool>(
+                d => driver.FindElement(By.CssSelector(cssSelector)).Displayed);
+            (driver as IJavaScriptExecutor).ExecuteScript(
+                String.Format("$('{0}').datepicker('setDate', '{1}')", cssSelector, date));
+        }
+        public void SelectDeparting1(string date)
+        {
+            driver.FindElement(By.CssSelector("#flight-departing-hp-flight")).Click();
+            this.SetDatepicker("#flight-departing-hp-flight", date);
+            //driver.FindElement(By.Id("flight-departing-hp-flight")).Clear();
+            //driver.FindElement(By.Id("flight-departing-hp-flight")).SendKeys(data);
+        }*/
+
+        public void SelectDeparting(string date)
         {
             driver.FindElement(By.Id("flight-departing-hp-flight")).Clear();
-            driver.FindElement(By.Id("flight-departing-hp-flight")).SendKeys(data);
+            driver.FindElement(By.Id("flight-departing-hp-flight")).SendKeys(date);
         }
 
-        public void SelectReturning(string data)
+        public void SelectReturning(string date)
         {
             driver.FindElement(By.Id("flight-returning-hp-flight")).Clear();
-            driver.FindElement(By.Id("flight-returning-hp-flight")).SendKeys(data);
+            driver.FindElement(By.Id("flight-returning-hp-flight")).SendKeys(date);
         }
 
         public void PickAdult(int number)
