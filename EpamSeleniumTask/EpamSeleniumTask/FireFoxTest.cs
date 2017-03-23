@@ -18,7 +18,10 @@ namespace EpamSeleniumTask
         [SetUp]
         public void start()
         {
-            driver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            //driver = new FirefoxDriver(options);
+            driver = new ChromeDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
@@ -33,10 +36,19 @@ namespace EpamSeleniumTask
         public void SearchFlight()
         {
             HomePage homePage = new HomePage(driver, wait);
+            SearchResultPage searchResulttPage = new SearchResultPage(driver, wait);
 
             homePage.Open();
             homePage.SelectFlights();
             homePage.SelectFlyFrom("London", "Heathrow");
+            homePage.SelectFlyTo("Dublin", "Dublin, Ireland (DUB)");
+            homePage.SelectDeparting("12/01/2017");
+            homePage.SelectReturning("12/07/2017");
+            homePage.PickAdult(2);
+            homePage.ClickSearch();
+            searchResulttPage.CheckPrice(1, "$102.80");
+            searchResulttPage.CheckPriceIsNotOneDollar(1);
+            searchResulttPage.CheckAirlinesBeneathStops();
         }
     }
 }

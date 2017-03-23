@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.Events;
 using NUnit.Framework;
@@ -29,16 +30,49 @@ namespace EpamSeleniumTask.Pages
 
         public void SelectFlights()
         {
-            driver.FindElement(By.XPath).Click();
-            driver.FindElement(By.CssSelector("button.tab.flight")).Click();
-            //wait.Until(ExpectedConditions.ElementExists(driver.FindElement(By.Id("flight-type-roundtrip-label-hp-flight"))));
+            driver.FindElement(By.Id("tab-flight-tab-hp")).Click();
+            wait.Until(ExpectedConditions.ElementExists(By.Id("flight-origin-hp-flight")));
         }
 
         public void SelectFlyFrom(string city, string airport)
         {
-            driver.FindElement(By.Id("flight-origin-hp-flight")).SendKeys(city);
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("autocomplete-dropdown")));
-            driver.FindElement(By.PartialLinkText(airport));
+            driver.FindElement(By.Id("flight-origin-hp-flight")).SendKeys(city + Keys.Right);
+            wait.Until(ExpectedConditions.ElementExists(By.Id("typeaheadDataPlain")));
+            driver.FindElement(By.PartialLinkText(airport)).Click();
+        }
+
+        public void SelectFlyTo(string city, string airport)
+        {
+            driver.FindElement(By.Id("flight-destination-hp-flight")).SendKeys(city + Keys.Right);
+            wait.Until(ExpectedConditions.ElementExists(By.Id("typeaheadDataPlain")));
+            driver.FindElement(By.PartialLinkText(airport)).Click();
+        }
+
+        public void SelectDeparting(string data)
+        {
+            driver.FindElement(By.Id("flight-departing-hp-flight")).Clear();
+            driver.FindElement(By.Id("flight-departing-hp-flight")).SendKeys(data);
+        }
+
+        public void SelectReturning(string data)
+        {
+            driver.FindElement(By.Id("flight-returning-hp-flight")).Clear();
+            driver.FindElement(By.Id("flight-returning-hp-flight")).SendKeys(data);
+        }
+
+        public void PickAdult(int number)
+        {
+            //driver.FindElement(By.Id("flight-adults-hp-flight")).FindElement(By.XPath("//option[@value='"+ number.ToString() +"']"));
+
+            driver.FindElement(By.Id("flight-adults-hp-flight")).SendKeys(number.ToString());
+        }
+
+        public void ClickSearch()
+        {
+            driver.FindElement(By.XPath("//*[@type='submit']")).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(".//*[@id='acol-interstitial']/h3")));
+            //IWebElement progressBar = driver.FindElement(By.XPath(".//*[@id='acol-interstitial']/div"));
+            //wait.Until(ExpectedConditions.StalenessOf(progressBar));
         }
     }
 }

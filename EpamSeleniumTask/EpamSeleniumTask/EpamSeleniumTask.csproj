@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="FireFoxTest.cs" />
+    <Compile Include="Pages\SearchResultPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
